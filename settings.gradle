@@ -1,0 +1,2 @@
+rootProject.name = 'putInt Sample'
+include ':lollipop', ':tiramisu'
