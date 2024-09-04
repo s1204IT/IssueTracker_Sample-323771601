@@ -1,0 +1,97 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdk 33
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId 'me.s1204.sample.putInt'
+        versionCode 1
+        versionName "1.0"
+        proguardFiles += 'proguard-rules.pro'
+        manifestPlaceholders = [api: ""]
+    }
+
+    flavorDimensions "default"
+
+    def configureFlavor = { flavor, sdkVersion ->
+        flavor.applicationIdSuffix '.api' + sdkVersion.toString()
+        //noinspection ExpiredTargetSdkVersion,OldTargetApi
+        flavor.targetSdk sdkVersion
+        flavor.minSdk sdkVersion
+        flavor.versionNameSuffix ' (' + sdkVersion.toString() + ')'
+        flavor.manifestPlaceholders = [api: sdkVersion.toString()]
+    }
+
+    productFlavors {
+        api21 {
+            configureFlavor(delegate, 21)
+        }
+        api22 {
+            configureFlavor(delegate, 22)
+        }
+        api23 {
+            configureFlavor(delegate, 23)
+        }
+        api24 {
+            configureFlavor(delegate, 24)
+        }
+        api25 {
+            configureFlavor(delegate, 25)
+        }
+        api26 {
+            configureFlavor(delegate, 26)
+        }
+        api27 {
+            configureFlavor(delegate, 27)
+        }
+        api28 {
+            configureFlavor(delegate, 28)
+        }
+        api29 {
+            configureFlavor(delegate, 29)
+        }
+        api30 {
+            configureFlavor(delegate, 30)
+        }
+        api31 {
+            configureFlavor(delegate, 31)
+        }
+        api32 {
+            configureFlavor(delegate, 32)
+        }
+        api33 {
+            configureFlavor(delegate, 33)
+        }
+        api34 {
+            configureFlavor(delegate, 34)
+        }
+        api35 {
+            configureFlavor(delegate, 35)
+        }
+
+    }
+
+    signingConfigs {
+        android {
+            storeFile file('android.jks')
+            storePassword 'android'
+            keyAlias 'android'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        configureEach {
+            signingConfig signingConfigs.android
+            minifyEnabled true
+        }
+    }
+
+    buildFeatures {
+        buildConfig false
+    }
+
+}

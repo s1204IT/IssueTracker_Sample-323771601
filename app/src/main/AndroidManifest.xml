@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.s1204.sample.putInt.lollipop">
+    package="me.s1204.sample.putInt">
 
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
-    <application android:label="putInt sample (Lollipop)">
+    <application android:label="putInt Sample (${api})">
 
         <activity
             android:name=".Activity"
             android:clearTaskOnLaunch="true"
             android:exported="true"
-            android:label="putInt (22)"
+            android:label="putInt (${api})"
             android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -5,5 +5,4 @@
 # IntelliJ
 /.idea/
 # Gradle Build
-/lollipop/build/
-/tiramisu/build/
+/app/build/

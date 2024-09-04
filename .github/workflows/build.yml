@@ -2,13 +2,8 @@ name: Build
 
 on:
   push:
-    paths:
-      - '.github/workflows/build.yml'
-      - 'lollipop/**'
-      - 'tiramisu/**'
-      - 'gradle/**'
-      - '*.gradle'
-      - '*.properties'
+    paths-ignore:
+      - 'README.md'
   workflow_dispatch:
 
 jobs:
@@ -24,15 +19,10 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '8'
+          java-version: '11'
 
-      - name: Cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches/
-            ~/.gradle/wrapper/
-          key: ${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
 
       - name: Set environments
         run: |
@@ -42,12 +32,11 @@ jobs:
           } >> $GITHUB_ENV
 
       - name: Build with Gradle
-        run: ./gradlew asD --no-daemon
+        run: ./gradlew assembleDebug --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.repo }}@${{ env.commit }}
           path: |
-            lollipop/build/outputs/apk/debug/lollipop-debug.apk
-            tiramisu/build/outputs/apk/debug/tiramisu-debug.apk
+            app/build/outputs/apk/api*/debug/app-api*-debug.apk

@@ -1,4 +1,4 @@
-package me.s1204.sample.putInt.lollipop;
+package me.s1204.sample.putInt;
 
 import android.content.Intent;
 import android.os.Bundle;
