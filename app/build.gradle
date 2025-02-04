@@ -3,25 +3,24 @@ plugins {
 }
 
 android {
-    compileSdk 33
-    buildToolsVersion "30.0.3"
+    namespace = 'me.s1204.sample.putInt'
+    compileSdk = 35
 
     defaultConfig {
-        applicationId 'me.s1204.sample.putInt'
-        versionCode 1
-        versionName "1.0"
+        versionCode = 1
+        versionName = "1.0"
         proguardFiles += 'proguard-rules.pro'
         manifestPlaceholders = [api: ""]
     }
 
-    flavorDimensions "default"
+    flavorDimensions = ["default"]
 
     def configureFlavor = { flavor, sdkVersion ->
-        flavor.applicationIdSuffix '.api' + sdkVersion.toString()
+        flavor.applicationIdSuffix = '.api' + sdkVersion.toString()
         //noinspection ExpiredTargetSdkVersion,OldTargetApi
-        flavor.targetSdk sdkVersion
-        flavor.minSdk sdkVersion
-        flavor.versionNameSuffix ' (' + sdkVersion.toString() + ')'
+        flavor.targetSdk = sdkVersion
+        flavor.minSdk = sdkVersion
+        flavor.versionNameSuffix = ' (' + sdkVersion.toString() + ')'
         flavor.manifestPlaceholders = [api: sdkVersion.toString()]
     }
 
@@ -76,22 +75,29 @@ android {
 
     signingConfigs {
         android {
-            storeFile file('android.jks')
-            storePassword 'android'
-            keyAlias 'android'
-            keyPassword 'android'
+            storeFile = file('android.jks')
+            storePassword = 'android'
+            keyAlias = 'android'
+            keyPassword = 'android'
         }
     }
 
     buildTypes {
         configureEach {
-            signingConfig signingConfigs.android
-            minifyEnabled true
+            signingConfig = signingConfigs.android
+        }
+        release {
+            minifyEnabled = true
         }
     }
 
     buildFeatures {
-        buildConfig false
+        buildConfig = false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
 
 }

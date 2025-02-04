@@ -7,14 +7,19 @@ import android.provider.Settings;
 import android.widget.Toast;
 
 public class Activity extends android.app.Activity {
+
+    private static final String SAMPLE_SYSTEM_KEY = "dcha_state";
+    private static final int SAMPLE_SYSTEM_VALUE = 1;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         finishAndRemoveTask();
         if (Settings.System.canWrite(this)) {
             try {
-                Settings.System.putInt(getContentResolver(), "dcha_state", 1);
+                Settings.System.putInt(getContentResolver(), SAMPLE_SYSTEM_KEY, SAMPLE_SYSTEM_VALUE);
             } catch (IllegalArgumentException e) {
+                //noinspection CallToPrintStackTrace
                 e.printStackTrace();
                 Toast.makeText(this, "Failed to write value.", Toast.LENGTH_LONG).show();
             }
